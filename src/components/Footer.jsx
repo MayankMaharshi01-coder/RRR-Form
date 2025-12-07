@@ -1,0 +1,175 @@
+import React from "react";
+import { motion } from "framer-motion";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaYoutube,
+  FaLinkedinIn,
+} from "react-icons/fa";
+import { FaLocationDot } from "react-icons/fa6";
+
+const Footer = () => {
+  return (
+    <footer className="relative bg-green-900 text-white lg:text-xl overflow-hidden ">
+      <div className="relative z-10  mx-auto px-10 py-20 flex flex-col  sm:grid-cols-2 lg:grid-cols-4 gap-10 ">
+        <motion.div
+          className="flex flex-col items-center"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2 }}
+        >
+          <h2 className="text-2xl font-bold text-gray-100 mb-4">
+            {" "}
+            Join with Us Quikly
+          </h2>
+          <a href="/home">
+            <button className="bg-linear-to-r to-green-400 from-green-700 text-white text-3xl px-6 py-3 rounded-full hover:bg-orange-700 transition">
+              Get Started
+            </button>
+          </a>
+        </motion.div>
+        <div className="flex justify-between flex-col  gap-10">
+          <motion.div
+            className="flex flex-col "
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2 }}
+          >
+            <h2 className="text-2xl font-bold text-gray-100 0 mb-4">
+              Follow Us
+            </h2>
+            <div className="flex gap-18 w-full mt-4">
+              {[
+                {
+                  icon: <FaFacebookF />,
+                  color: "hover:text-blue-400 text-5xl",
+                },
+                {
+                  icon: <FaInstagram />,
+                  color: "hover:text-pink-500 text-5xl",
+                },
+                { icon: <FaYoutube />, color: "hover:text-red-500 text-5xl" },
+                {
+                  icon: <FaLinkedinIn />,
+                  color: "hover:text-blue-300 text-5xl",
+                },
+              ].map((s, i) => (
+                <motion.div
+                  key={i}
+                  whileHover={{ scale: 1.3, y: -20 }}
+                  transition={{ type: "spring", stiffness: 200 }}
+                  className={` cursor-pointer transition ${s.color}`}
+                >
+                  {s.icon}
+                </motion.div>
+              ))}
+            </div>
+            <hr className="mt-10 " />
+          </motion.div>
+
+          <div className="flex md:flex-row flex-col w-full justify-between  gap-4   ">
+            {" "}
+            <motion.div
+              className="flex flex-col "
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <h2 className="text-2xl font-bold text-gray-100  mb-4 ">
+                Quick Links
+              </h2>
+              <ul className="space-y-2 text-white flex flex-col ">
+                <a
+                  href="/home"
+                  className="   hover:text-blue-400 cursor-pointer transition"
+                >
+                  Home
+                </a>
+                <a
+                  href="/home"
+                  className="  hover:text-blue-400 cursor-pointer transition"
+                >
+                  Courses
+                </a>
+                <a
+                  href="/home"
+                  className="   hover:text-blue-400 cursor-pointer transition"
+                >
+                  Projects
+                </a>
+                <a
+                  href="/contact"
+                  className="   hover:text-blue-400 cursor-pointer transition"
+                >
+                  Contact
+                </a>
+                <a
+                  href="/about"
+                  className="   hover:text-blue-400 cursor-pointer transition"
+                >
+                  About
+                </a>
+              </ul>
+             
+            </motion.div> <hr  className=""/>
+            <motion.div
+              className="flex flex-col max-w-80  justify-center items-start "
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-2xl font-bold text-gray-100 mb-4">
+                About Us
+              </h2>
+              <p className=" leading-relaxed">
+                Committed to environmental stewardship through the power of the
+                Three R's: Reduce, Reuse, Recycle. Join us in creating a
+                healthier planet.
+              </p>
+           
+            </motion.div>
+   <hr />
+            {/* <hr className="bg-red-700 h-1 text-amber-200" /> */}
+            {/* Quick Links */}
+            {/* Contact */}
+            <motion.div
+              className="flex flex-col items-start"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+            >
+              <h2 className="text-2xl font-bold text-gray-100 mb-4">Contact</h2>
+              <p className="">
+                {" "}
+                <FaLocationDot className="inline" /> Churu, Rajasthan, India
+              </p>
+              <p className=" "> 📞 +91 90243 03162</p>
+              <p className="">✉️ codechuru@gmail.com</p>
+            </motion.div>
+            {/* <hr className="text-white bg-wjite fill-white"/> */}
+            {/* Social Media */}
+          </div>
+        </div>
+        <hr />
+      </div>
+
+      {/* Bottom Strip */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ delay: 1 }}
+        className="relative z-10 text-center py-6 bg-green-950/50 text-gray-300"
+      >
+        <p>
+          © {new Date().getFullYear()}{" "}
+          <span className="text-blue-400 hover:scale-125 font-semibold">
+            InnovationLab
+          </span>
+          . All Rights Reserved.
+        </p>
+      </motion.div>
+    </footer>
+  );
+};
+
+export default Footer;
