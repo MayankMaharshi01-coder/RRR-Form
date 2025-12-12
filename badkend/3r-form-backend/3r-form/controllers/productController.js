@@ -4,7 +4,7 @@ exports.postProduct = [
   (req, res, next) => {
     console.log('cookie', req.body, req);
     if (!req.session.school) {
-      return res.status(401).json({ error: 'Unauthorized' });
+      return res.status(401).json({ message: 'Unauthorized' });
     }
     next();
   },

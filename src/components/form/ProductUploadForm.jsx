@@ -9,7 +9,9 @@ import { postProduct } from './api';
 import Textarea from './Textarea';
 import FormButton from './FormButton';
 
-function ProductUploadForm() {
+
+
+function ProductUploadForm({ showAlert }) {
   const [focus, setFocus] = useState();
 
   const validationSchema = Yup.object({
@@ -74,9 +76,16 @@ function ProductUploadForm() {
       promise
         .then((responseData) => {
           console.log('Response data after submission', responseData);
+          showAlert("Product Uploaded Successfully", "not-error", "uploadProduct");
         })
         .catch((error) => {
           console.error('Error during submission', error);
+          window.scrollTo({
+            top:0,
+            behavior: 'smooth'
+          })
+          showAlert(error.response.statusText
+ , "error")
         });
       console.log('Form data', data, values.title);
     },

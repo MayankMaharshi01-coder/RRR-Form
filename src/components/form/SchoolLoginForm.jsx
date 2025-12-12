@@ -8,7 +8,7 @@ import { postLoginSchool } from "./api";
 import { useNavigate } from "react-router-dom";
 
 
-function SchoolLoginForm() {
+function SchoolLoginForm({ showAlert }) {
       const navigate = useNavigate()
      const validationSchema = Yup.object({
         schoolEmail: Yup.string().email('Invalid email format').required('School Email is required'),
@@ -26,8 +26,19 @@ function SchoolLoginForm() {
           formData.append('schoolEmail', values.schoolEmail);
           formData.append('password', values.password);
          postLoginSchool(formData).then((() => {
+            showAlert("Successfully Login", "not-error", "Login");
+              window.scrollTo({
+            top:0,
+            behavior: 'smooth'
+          })
           navigate('/uploadProducts', { replace:true } )
-         }))
+         })).catch((error) => {
+             showAlert(error.response.data.error ,"error", "logNot");
+             window.scrollTo({
+            top:0,
+            behavior: 'smooth'
+            })
+         })
           console.log('Form data', values);
         }
       });

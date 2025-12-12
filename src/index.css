@@ -1,8 +1,40 @@
 @import "tailwindcss";
 
+@theme{
+     --color-gray-popup: rgba(214, 214, 214, 0.95);
+    --color-green-popup: #20D61A;
+    --color-red-popup: #D61A20;
+}
+
+
+
+
+
+
+
 .no-scroll{
   overflow: hidden;
 }
+
+
+.animate-popup{
+  animation: popup 4s ease-in-out forwards;
+}
+
+@keyframes popup {
+0%{
+  visibility: visible;
+  opacity: 0;
+  top:4%;
+} 
+40%{
+top:6%;
+opacity: 1;
+}
+100%{
+  visibility: hidden;
+} 
+  }
 
  .autoFill:-webkit-autofill {
         -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;

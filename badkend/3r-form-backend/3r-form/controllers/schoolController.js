@@ -11,7 +11,7 @@ exports.postSchoolRegister = (req, res, next) => {
     
     School.find({schoolEmail}).then((res) => {
       console.log('res', res)
-      res.status(400).json({error: "this email is already exist"})
+     return res.status(400).json({ error: "this email is already exist" })
     }).catch(() => {
           bycrypt.hash(password, 12)
       .then(hashedPassword => {
@@ -24,7 +24,7 @@ exports.postSchoolRegister = (req, res, next) => {
       })
       .catch((error) => {
         console.error('Error saving school:', error);
-        res.status(500).json({ error: 'Failed to create school' });
+       return res.status(500).json({ error: 'Email is Already Exist' });
       });
     })
 };

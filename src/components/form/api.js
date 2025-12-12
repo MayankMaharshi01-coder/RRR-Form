@@ -26,7 +26,6 @@ export function getProducts() {
     })
     .catch((error) => {
       console.error('API error', error);
-      throw error;
     });
 }
 
