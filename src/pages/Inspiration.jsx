@@ -1,5 +1,6 @@
 import React from 'react';
 import InspirationCard from '../components/InspirationCard';
+import Slidebar from "../components/Slidebar";
 import Text from '../components/Text';
 const photo1 = "/images/pictac1.jpg"
 const photo2 = "/images/pictac2.jpg"
@@ -8,7 +9,9 @@ const photo4 = "/images/pictac4.png"
 
 const Inspiration = () => {
   return (
-    <><div className='bg-green-100'>
+    <>
+        <Slidebar />
+        <div className='bg-green-100'>
 <div className='flex  justify-center'>
        <h1 className='font-bold text-red-800 text-5xl  mt-18 font-serif'>! -Our Inspiration- !</h1>
      </div>

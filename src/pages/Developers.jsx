@@ -1,5 +1,6 @@
 import React from 'react'
 import DeveloperCards from '../components/DeveloperCard';
+import Slidebar from "../components/Slidebar";
 const photo1 = '/images/pic1.jpg';
 const photo2 = '/images/pic2.jpg';
 const photo3 = '/images/pic3.jpg';
@@ -9,6 +10,7 @@ const photo5 = '/images/pic5.jpg';
 const Developer = () => {
   return (
   <>
+      <Slidebar />
     <div className='bg-green-100 '>
       
      <div className='flex justify-center'>

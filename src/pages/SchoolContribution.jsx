@@ -1,9 +1,12 @@
 import RRRCenter from "../components/InspiringCenter";
 import SchoolDetail from "../components/SchoolsDetails";
+import Slidebar from "../components/Slidebar";
 import { Link } from "react-router-dom";
 export default function RRRPage() {
   return (
-<div className="w-full min-h-full bg-[#D9E4DD] flex flex-col">
+  <>
+      <Slidebar />
+  <div className="w-full min-h-full bg-[#D9E4DD] flex flex-col">
 
   <div className="">
 
@@ -32,6 +35,6 @@ export default function RRRPage() {
     </div>
   </div>
 </div>
-
+</>
   );
 }

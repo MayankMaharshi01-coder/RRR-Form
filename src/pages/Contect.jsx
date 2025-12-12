@@ -8,6 +8,7 @@ import {
   FaPaperPlane,
   FaCheckCircle,
 } from "react-icons/fa";
+import Slidebar from "../components/Slidebar";
 
 export default function Contact() {
   const form = useRef();
@@ -96,6 +97,8 @@ export default function Contact() {
   };
 
   return (
+    <>
+    <Slidebar />
     <div
       id="contact"
       className="w-full min-h-screen px-4 pt-20 pb-12 text-black bg-green-200/10 sm:px-6 lg:px-8"
@@ -302,5 +305,6 @@ export default function Contact() {
         <div className="absolute bottom-0 left-0 rounded-full pointer-events-none w-96 h-96 bg-emerald-500/5 blur-3xl" />
       </motion.div>
     </div>
+    </>
   );
 }

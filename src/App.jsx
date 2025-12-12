@@ -35,9 +35,6 @@ function App() {
   return (
     <BrowserRouter>
     <div className="bg-green-100 scroll-w-0 relative ">
-
-        <Slidebar />
-
         <main className="relative">
        {alert && <AlertPopup className="" message={alert.message} type={alert.type} />}
           <Routes>

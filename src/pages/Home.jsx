@@ -2,6 +2,7 @@ import  {useState} from "react";
 import Item from "../components/Item";
 import HomeVideo from "../components/HomeVideo";
 import DetailCard from "../components/DetailCard";
+import Slidebar from "../components/Slidebar";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { RiArrowDropDownLine } from "react-icons/ri";
@@ -197,6 +198,7 @@ gsap.registerPlugin(useGSAP)
 
     return (
       <>
+          <Slidebar />
          <div className="bg-[#D9E4DD] text-3xl sm:text-4xl md:text-5xl">
         <div className="flex flex-col w-full bg-[#f0f8ef] p-4">
             <div className="flex items-center lg:flex-row flex-col justify-around">

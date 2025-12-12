@@ -5,7 +5,7 @@ const Cards = (props) => {
     return (
         <div 
           
-          className='flex  flex-col shrink-0 w-[300px] p-6 bg-green-700 h-screen rounded-xl shadow-2xl items-center justify-center text-white gap-5'
+          className='flex  flex-col shrink-0 w-[300px] p-6 bg-green-700 max-h-2/4 rounded-xl shadow-2xl items-center justify-center text-white gap-5'
         >
           
             <img 

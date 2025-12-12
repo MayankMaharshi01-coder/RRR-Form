@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import SelectSchool from "../components/SelectSchool";
+import Slidebar from "../components/Slidebar";
 import { AllProductsData } from "../context/AllProducts";
 
 const YourSchool = () => {
@@ -111,6 +112,7 @@ const schoolDataList = useContext(AllProductsData);
 
   return(
     <>
+        <Slidebar />
     <SelectSchool schoolDataList={schoolDataList} />
     </>
   )
