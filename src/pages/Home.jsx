@@ -198,8 +198,7 @@ gsap.registerPlugin(useGSAP)
     return (
       <>
          <div className="bg-[#D9E4DD] text-3xl sm:text-4xl md:text-5xl">
-         <HomeVideo />
-        <div className="flex flex-col w-full bg-[#f0f8ef] mt-10 p-4 rounded-t-3xl">
+        <div className="flex flex-col w-full bg-[#f0f8ef] p-4">
             <div className="flex items-center lg:flex-row flex-col justify-around">
               <div className="flex flex-col">
               <input
