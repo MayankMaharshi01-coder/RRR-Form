@@ -111,14 +111,7 @@ exports.getSchoolLeaderBoard = async (req, res, next) => {
     { $unwind: "$school" },
     {
       $project: {
-        "school.schoolImage": 1,
-        "school.schoolName": 1,
-        "school.subDistrict": 1,
-        "school.schoolPhone": 1,
-        "school.schoolEmail": 1,
-        "school.address": 1,
-        "school.inchargeName": 1,
-        "school.inchargePhone": 1,
+      "school.password": 0
       }
     }
   ])
