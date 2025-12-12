@@ -11,7 +11,7 @@ exports.postSchoolRegister = (req, res, next) => {
     
     School.find({schoolEmail}).then((res) => {
       console.log('res', res)
-      res.status(400).json({error: "this email is already exist"})
+     return res.status(400).json({ error: "this email is already exist" })
     }).catch(() => {
           bycrypt.hash(password, 12)
       .then(hashedPassword => {
@@ -24,7 +24,7 @@ exports.postSchoolRegister = (req, res, next) => {
       })
       .catch((error) => {
         console.error('Error saving school:', error);
-        res.status(500).json({ error: 'Failed to create school' });
+       return res.status(500).json({ error: 'Email is Already Exist' });
       });
     })
 };
@@ -74,7 +74,7 @@ exports.getAllSchool = (req, res, next) => {
     console.log('datas', data)
     res.status(200).json(data)
   }).catch((err) => {
-    res.status(500).json('fail to fetch all school')
+    res.status(500).json({ message: 'fail to fetch all school' })
   })
 }
 
@@ -84,7 +84,7 @@ exports.getSchoolById = (req, res, next) => {
     console.log('datas', data)
     res.status(200).json(data)
   }).catch((err) => {
-    res.status(500).json('fail to fetch school')
+    res.status(500).json({ message: 'fail to fetch school' })
   })
 }
 
@@ -111,14 +111,8 @@ exports.getSchoolLeaderBoard = async (req, res, next) => {
     { $unwind: "$school" },
     {
       $project: {
-        "school.schoolImage": 1,
-        "school.schoolName": 1,
-        "school.subDistrict": 1,
-        "school.schoolPhone": 1,
-        "school.schoolEmail": 1,
-        "school.address": 1,
-        "school.inchargeName": 1,
-        "school.inchargePhone": 1,
+      "school.password": 0,
+      "school.__v": 0
       }
     }
   ])
@@ -126,12 +120,14 @@ res.status(200).json(product)
 }
 
 
-exports.getSchoolBySubDistrict = () => {
-  const { subDistrict } = req.body;
-  School.find({subDistrict}.then((data) => {
+exports.getSchoolBySubDistrict = (req, res, next) => {
+  const { subDistrict } = req.query;
+  console.log('get schhool by sub district', req.query);
+  
+  School.find({subDistrict}).then((data) => {
     return res.status(200).json(data)
-  })).catch(err => {
+  }).catch(err => {
     console.log('error while getting school by sub district',err)
-    res.status(400).json(err)
+    res.status(400).json({ message: 'no school in this sub disrtict'})
   })
 }

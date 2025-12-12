@@ -29,14 +29,14 @@ function App() {
     })
         setTimeout(() => {
             setAlert(null);
-        }, 5000);
+        }, 4000);
     }
 
   return (
     <BrowserRouter>
     <div className="bg-green-100 scroll-w-0 relative ">
         <main className="relative">
-       {alert && <AlertPopup className="" message={alert.message} type={alert.type} />}
+       {alert && <AlertPopup className="" message={alert.message} type={alert.type} from={alert.from}/>}
           <Routes>
             <Route path="/" element={<Welcome />} />
             <Route path="/home" element={<Home />} />
@@ -46,9 +46,9 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/yourSchool" element={<YourSchool />} />
             <Route path="/schoolContribution" element={<SchoolContribution />} />
-            <Route path="/uploadProducts" element={<ProductUploadForm/>}/>
-            <Route path="/schoolLogin" element={<SchoolLoginForm/>}/>
-            <Route path="/schoolRegister" element={<SchoolRegisterForm/>}/>
+            <Route path="/uploadProducts" element={<ProductUploadForm showAlert={showAlert}/>}/>
+            <Route path="/schoolLogin" element={<SchoolLoginForm showAlert={showAlert}/>}/>
+            <Route path="/schoolRegister" element={<SchoolRegisterForm showAlert={showAlert}/>}/>
             <Route path="/schoolPage" element={<SchoolPage />}/>
           </Routes>
         </main>

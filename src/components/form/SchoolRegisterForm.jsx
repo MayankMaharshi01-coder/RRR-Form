@@ -7,7 +7,7 @@ import FormButton from "./FormButton";
 import { postRegisterSchool } from "./api";
 import { useNavigate } from "react-router-dom";
 import DropDown from './DropDown';
-function SchoolRegisterForm() {
+function SchoolRegisterForm({ showAlert }) {
       const navigation = useNavigate();
 
 
@@ -54,9 +54,19 @@ function SchoolRegisterForm() {
 
           postRegisterSchool(formData).then(responseData => {
             console.log('Response data after submission', responseData);
+            showAlert("Successfully signed", "not-error", "signIn");
+              window.scrollTo({
+            top:0,
+            behavior: 'smooth'
+          })
             navigation('/schoolLogin', { replace: true })
           }).catch(error => {
             console.error('Error during submission', error);
+             showAlert(error.response.data.error ,"error", "signNot");
+             window.scrollTo({
+            top:0,
+            behavior: 'smooth'
+          })
           });
           console.log('Form data', values);
         }

@@ -61,11 +61,11 @@ return(<>
     onChange={onChange} 
     name={name}
     onBlur={onBlur}
-    className={"block autofill:bg-transparent px-2.5 pb-2.5 pt-4 w-full text-sm text-heading bg-transparent rounded-base border border-gray-50 border-default-medium appearance-none focus:outline-none focus:border-white peer h-14 rounded-[9px] pl-3 font-medium text-white" + outlineRing}
+    className={"block autoFill px-2.5 pb-2.5 pt-4 w-full text-sm text-heading bg-transparent rounded-base border border-gray-50 border-default-medium appearance-none focus:outline-none focus:border-white peer h-14 rounded-[9px] pl-3 font-medium text-white" + outlineRing}
     />
     {type === 'date' && <Icon className="absolute top-4 right-5" icon="uil:calender" width="30px" height="30px"  style={{color: 'oklch(45.3% 0.124 130.933)'}} />}
     {type === 'password' && <button type="button" onClick={handlePassShowHide}>{Type === 'password' ? <Icon className="absolute top-5 right-6" icon="mdi:show" width="20px" height="20px"  style={{color: 'oklch(45.3% 0.124 130.933)'}} /> : <Icon className="absolute top-5 right-6" icon="mdi:hide" width="20px" height="20px"  style={{color: 'oklch(45.3% 0.124 130.933)'}} />}</button>}
-    <label className="inline-flex items-center select-none cursor-text absolute text-sm text-body duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#D9E4DD] px-2 peer-focus:px-2 peer-focus:text-fg-brand peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1 text-white font-semibold ml-2 " htmlFor={id}>{children}</label>
+    <label className="inline-flex items-center select-none cursor-text absolute text-sm text-body duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-left bg-[#D9E4DD] px-2 peer-focus:px-2 peer-focus:text-fg-brand peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1 text-white font-semibold ml-2 " htmlFor={id}>{children}</label>
     </div>
 
     {touched && errors ? (
