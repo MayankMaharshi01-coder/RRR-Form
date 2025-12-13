@@ -10,10 +10,6 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  incharge: {
-    type: String,
-    required: true,
-  },
   category: {
     type: String,
     required: true,
@@ -41,6 +37,10 @@ const productSchema = new mongoose.Schema({
    type: String,
    default: '1'
   },
+  images: [{
+    type: String,
+    required: true
+  }],
   description: {
     type: String,
     required: true,

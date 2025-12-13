@@ -13,7 +13,6 @@ exports.postProduct = [
       title,
       donorName,
       donorClass,
-      incharge,
       category,
       condition,
       description,
@@ -34,7 +33,6 @@ exports.postProduct = [
       donorName,
       donorClass,
       title,
-      incharge,
       category,
       thumbnail,
       images,
@@ -49,6 +47,79 @@ exports.postProduct = [
       .catch((error) => {
         console.error('Error saving thing:', error);
         res.status(500).json({ error: 'Failed to create thing' });
+      });
+  },
+];
+
+
+exports.postEditProduct = [
+  (req, res, next) => {
+    console.log('cookie', req.body, req);
+    if (!req.session.school) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
+    next();
+  },
+  (req, res, next) => {
+    if (!req.session.school) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
+    next();
+  },
+  (req, res, next) => {
+    const {
+      title,
+      donorName,
+      donorClass,
+      category,
+      condition,
+      description,
+    } = req.body;
+
+    // Handle thumbnail: prefer new upload, else use old path from body
+    let thumbnail;
+    if (req.files && req.files.thumbnail && req.files.thumbnail[0]) {
+      thumbnail = req.files.thumbnail[0].path;
+    } else if (req.body.thumbnail && typeof req.body.thumbnail === "string") {
+      thumbnail = req.body.thumbnail;
+    } else {
+      return res.status(422).send('No image provided');
+    }
+
+    // Handle images: combine new uploads and old paths
+    let images = [];
+    // Add new uploaded images
+    if (req.files && req.files.images) {
+      images = req.files.images.map((file) => file.path);
+    }
+    // Add old image paths from body (if any)
+    if (req.body.images) {
+      // req.body.images can be a string or array
+      if (Array.isArray(req.body.images)) {
+        images = images.concat(req.body.images.filter(img => typeof img === "string"));
+      } else if (typeof req.body.images === "string") {
+        images.push(req.body.images);
+      }
+    }
+    // Remove duplicates if any
+    images = [...new Set(images)];
+
+    Product.findByIdAndUpdate(req.params.id, {
+      donorName,
+      donorClass,
+      title,
+      category,
+      thumbnail,
+      images,
+      condition,
+      description,
+    })
+      .then(() => {
+        res.status(201).json({ message: 'Product updated successfully' });
+      })
+      .catch((error) => {
+        console.error('Error update thing:', error);
+        res.status(500).json({ error: 'Failed to update thing' });
       });
   },
 ];

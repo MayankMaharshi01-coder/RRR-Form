@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 
-function Input({type, placeholder, value, children, labelClass, inputClass, id, name, onChange, errors, touched, focus, onBlur, multiple, removeImages}) {
+function Input({type, placeholder, value, children, labelClass, inputClass, id, name, onChange, errors, touched, editing, focus, onBlur, removeFile, multiple, removeImages}) {
+           const [readOnly, setReadOnly] = useState(true);
           const [outlineRing, setOutlineRing] = useState('focus:ring-green-500 focus:outline-green-500')
           const [Type, setType] = useState(type)
           
@@ -24,11 +25,14 @@ function Input({type, placeholder, value, children, labelClass, inputClass, id, 
           }
           }, [value, errors, touched])
          
+          console.log('input value', value)
 
-
+  const handleEdit = () => {
+    setReadOnly(false);
+  }
 return(<>
      {type === 'file' ? (<div className="flex flex-col items-start w-full">
-    { value !== null && !Array.isArray(value) || Array.isArray(value) && value.length !== 0  ? Array.isArray(value) && value.length > 0 ? <div className="flex gap-6 bg-[#cadbd0] flex-wrap">{ value.map((file, index) => <div className="relative"><img key={index} className="w-30 h-30 object-cover self-center" src={URL.createObjectURL(file)}/><button type="button" onClick={() => { removeImages(index) }} className="absolute top-0 right-1 cursor-pointer"><Icon icon="material-symbols:cancel-outline-rounded" width="30px" height="30px"  style={{color: '#910a00'}} /></button></div>) }</div> : <img className="w-60 object-cover self-center" src={URL.createObjectURL(value)}/> :
+    { value !== null && !Array.isArray(value) || Array.isArray(value) && value.length !== 0  ? Array.isArray(value) && value.length > 0 ? <div className="flex gap-6 bg-[#cadbd0] flex-wrap">{ value.map((file, index) => <div className="relative"><img key={index} className="w-30 h-30 object-cover self-center" src={file instanceof Blob ? URL.createObjectURL(file) : `http://localhost:3000/${file}`}/><button type="button" onClick={() => { removeImages(index) }} className="absolute top-0 right-1 cursor-pointer"><Icon icon="material-symbols:cancel-outline-rounded" width="30px" height="30px"  style={{color: '#910a00'}} /></button></div>) } </div> : <div className="w-60 self-center relative"> <img className="w-60 object-cover self-center" src={value instanceof Blob ? URL.createObjectURL(value) : `http://localhost:3000/${value}`} /><button onClick={removeFile} className="absolute top-0 right-1 cursor-pointer"><Icon icon="material-symbols:cancel-outline-rounded" width="30px" height="30px"  style={{color: '#910a00'}} /></button></div> :
     <>
     <div className="w-full py-9 bg-[#cadbd0] rounded-2xl border border-gray-300 gap-3 grid border-dashed">
 <div className="grid gap-1">
@@ -61,10 +65,14 @@ return(<>
     onChange={onChange} 
     name={name}
     onBlur={onBlur}
+    readOnly={editing ? readOnly : false}
     className={"block autoFill px-2.5 pb-2.5 pt-4 w-full text-sm text-heading bg-transparent rounded-base border border-gray-50 border-default-medium appearance-none focus:outline-none focus:border-white peer h-14 rounded-[9px] pl-3 font-medium text-white" + outlineRing}
     />
     {type === 'date' && <Icon className="absolute top-4 right-5" icon="uil:calender" width="30px" height="30px"  style={{color: 'oklch(45.3% 0.124 130.933)'}} />}
     {type === 'password' && <button type="button" onClick={handlePassShowHide}>{Type === 'password' ? <Icon className="absolute top-5 right-6" icon="mdi:show" width="20px" height="20px"  style={{color: 'oklch(45.3% 0.124 130.933)'}} /> : <Icon className="absolute top-5 right-6" icon="mdi:hide" width="20px" height="20px"  style={{color: 'oklch(45.3% 0.124 130.933)'}} />}</button>}
+
+    <label className="inline-flex items-center select-none cursor-text absolute text-sm text-body duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-left bg-[#D9E4DD] px-2 peer-focus:px-2 peer-focus:text-fg-brand peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1 text-white font-semibold ml-2 " htmlFor={id}>{children}</label>
+    {editing && readOnly && <button type="button" onClick={handleEdit}> <Icon className="absolute top-5 right-6" icon="iconamoon:edit" width="20px" height="20px"  style={{color: 'oklch(45.3% 0.124 130.933)'}} /></button>}
     <label className="inline-flex items-center select-none cursor-text absolute text-sm text-body duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-left bg-[#D9E4DD] px-2 peer-focus:px-2 peer-focus:text-fg-brand peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1 text-white font-semibold ml-2 " htmlFor={id}>{children}</label>
     </div>
 

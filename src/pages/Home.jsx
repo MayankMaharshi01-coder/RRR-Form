@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import Item from "../components/Item";
 import HomeVideo from "../components/HomeVideo";
 import DetailCard from "../components/DetailCard";
@@ -8,7 +8,7 @@ import { useGSAP } from "@gsap/react";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { RiArrowDropUpLine } from "react-icons/ri";
 import { AllProductsData } from "../context/AllProducts";
-
+import { getProducts } from "../components/form/api";
 
 // const dummyData = [
 //   {
@@ -140,9 +140,10 @@ import { AllProductsData } from "../context/AllProducts";
 // ];
 
 function Home() {
-
   const schoolName = localStorage.getItem("schoolName");
-  const dummyData = useContext(AllProductsData).filter((item) => item.schoolName === schoolName );
+  const dummyData = useContext(AllProductsData).filter(
+    (item) => item.schoolName === schoolName
+  );
   const [openDrop, setDrop] = useState(false);
   const openDropdown = () => {
     setDrop(!openDrop);
@@ -203,22 +204,33 @@ function Home() {
   const handleCategoryClick = (category) => {
     setSearch("");
     if (category === "ALL") {
-      setData(dummyData);
+      setData(productData);
       return;
     } else {
-      let newdata = dummyData.filter((item) => item.category.toUpperCase() === category.toUpperCase()); 
-      setData(newdata)  
+      let newdata = productData.filter(
+        (item) => item.category.toUpperCase() === category.toUpperCase()
+      );
+      setData(newdata);
       console.log(newdata);
-    setData(newdata);}
+      setData(newdata);
+    }
   };
 
-    return (
-      <>
-        <Slidebar />
-        <div className="bg-[#D9E4DD] text-3xl sm:text-4xl md:text-5xl">
-          <div className="flex flex-col w-full bg-[#f0f8ef] p-4 rounded-t-3xl">
-            <div className="flex items-center lg:flex-row flex-col justify-around">
-              <div className="flex flex-col">
+  const [productData, setProductData] = useState([]);
+  useEffect(() => {
+    getProducts().then((data) => {
+      setProductData(data);
+      console.log(data);
+    });
+  }, []);
+
+  return (
+    <>
+      <Slidebar />
+      <div className="bg-[#D9E4DD] text-3xl sm:text-4xl md:text-5xl">
+        <div className="flex flex-col w-full bg-[#f0f8ef] p-4 rounded-t-3xl">
+          <div className="flex items-center lg:flex-row flex-col justify-around">
+            <div className="flex flex-col">
               <input
                 className="bg-white w-full sm:w-80 md:w-96 lg:w-[500px] mx-auto text-3xl p-6 h-15 m-10 shadow-md rounded-xl  "
                 value={search}
@@ -233,6 +245,7 @@ function Home() {
                   onClick={openDropdown}
                   className="text-3xl font-serif font-semibold mb-10 flex items-center cursor-pointer"
                 >
+                  productData
                   <h1>Sort Products</h1>
                   <RiArrowDropDownLine size={50} />
                 </div>
@@ -386,7 +399,38 @@ function Home() {
           </div>
 
           <div className="flex flex-wrap gap-5 justify-center px-4">
-            {data.map(function ({
+            {/* {productData.map((product, index) => {
+              return <div className="flex bg-white p-3 gap-7 max-w-full flex-wrap items-center flex-col">
+                <img src={`http://localhost:3000/${product.thumbnail}`} alt={product.title} className="w-32 h-32 object-cover" />
+                <h1>{product.title}</h1>
+                <h1>{product.description}</h1>
+              </div>
+           })} */}
+
+            {productData.map(function ({
+              category,
+              name,
+              thumbnail,
+              description,
+              schoolName,
+              _id,
+            }) {
+              return (
+                <Item
+                  category={category}
+                  name={name}
+                  imgUrl={`http://localhost:3000/${thumbnail}`}
+                  description={description}
+                  schoolName={schoolName}
+                  key={_id}
+                  id={_id}
+                  goodsData={dummyData}
+                  handleClick={handleClick}
+                />
+              );
+            })}
+
+            {/* {data.map(function ({
               category,
               name,
               imgUrl,
@@ -407,7 +451,7 @@ function Home() {
                   handleClick={handleClick}
                 />
               );
-            })}
+            })} */}
           </div>
         </div>
       </div>
