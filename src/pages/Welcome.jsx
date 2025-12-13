@@ -91,7 +91,7 @@ export default function Welcome() {
           <div className='w-full bg-no-repeat bg-cover bg-center shadow-md shadow-green-800' style={{ backgroundImage: `url(${WelcomeBg})` }}>
         <Hero></Hero>
 
-<div className='flex justify-around p-20 flex-col min-h-screen items-center lg:flex-row bg-linear-to-b from-green-400 to-green-700'>
+<div className='flex justify-around p-20 flex-col min-h-screen items-center gap-8 lg:flex-row bg-linear-to-b from-green-400 to-green-700'>
      <Cards image={Reduse}
                  name='Reduce'
                   post='Minimize your consumption at the source; the best waste is the one never created.'
