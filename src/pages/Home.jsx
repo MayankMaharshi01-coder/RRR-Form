@@ -245,7 +245,7 @@ function Home() {
                   onClick={openDropdown}
                   className="text-3xl font-serif font-semibold mb-10 flex items-center cursor-pointer"
                 >
-                  productData
+                  
                   <h1>Sort Products</h1>
                   <RiArrowDropDownLine size={50} />
                 </div>
