@@ -144,3 +144,32 @@ export function getSchoolLeaderBoard() {
       console.log('error while getting by district school', err);
     });
 }
+
+
+export function postEditProduct(id, data) {
+  return axios
+    .put(`http://localhost:3000/product/${id}`, data, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
+    .then((response) => {
+      console.log('API response', response.data);
+      return response.data;
+    })
+    .catch((error) => {
+      console.error('API error', error);
+      throw error;
+    });
+}
+
+export function getProductSearch(query) {
+  return axios
+    .get(`http://localhost:3000/product/search?q=${query}`)
+    .then((response) => {
+      console.log('API response', response.data);
+      return response.data;
+    })
+    .catch((error) => {
+      console.error('API error', error);
+      throw error;
+    });
+}

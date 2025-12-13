@@ -76,7 +76,10 @@ app.use(
   })
 );
 
-app.use('/uploads', express.static(path.join(__dirname, 'public', 'uploads')));
+app.use('/public/uploads', [(req, res, next) => {
+console.log('Static file request', req.path, req.url);
+next();
+},express.static(path.join(__dirname, 'public', 'uploads'))]);
 app.use(express.json());
 
 app.use(

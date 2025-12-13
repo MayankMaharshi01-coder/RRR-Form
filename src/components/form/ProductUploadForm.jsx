@@ -21,7 +21,6 @@ function ProductUploadForm({ showAlert }) {
       .oneOf(['good', 'avarage', 'nice'], 'Select a valid condition')
       .required('Condition is required'),
     description: Yup.string().required('Description is required'),
-    incharge: Yup.string().required('Incharge Name is required'),
     images: Yup.array().min(1, 'At least one image is required'),
     donorName: Yup.string().required('Donor Name is required'),
     donorClass: Yup.string()
@@ -52,7 +51,6 @@ function ProductUploadForm({ showAlert }) {
     initialValues: {
       thumbnail: null,
       title: '',
-      incharge: '',
       category: '',
       condition: 'condition',
       images: [],
@@ -65,7 +63,6 @@ function ProductUploadForm({ showAlert }) {
       const data = new FormData();
       data.append('thumbnail', values.thumbnail);
       data.append('title', values.title);
-      data.append('incharge', values.incharge);
       data.append('category', values.category);
       data.append('condition', values.condition);
       data.append('images', values.images);
@@ -149,18 +146,6 @@ function ProductUploadForm({ showAlert }) {
               placeholder=" "
             >
               Title
-            </Input>
-            <Input
-              type="text"
-              touched={formik.touched.incharge}
-              errors={formik.errors.incharge}
-              name="incharge"
-              value={formik.values.incharge}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              placeholder=" "
-            >
-              Incharge Name
             </Input>
             <Input
               type="text"

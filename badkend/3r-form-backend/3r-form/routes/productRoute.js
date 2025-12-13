@@ -7,5 +7,6 @@ productRoute.post('/product', productController.postProduct);
 productRoute.get('/allProducts', productController.getAllProducts);
 productRoute.get('/product/:id', productController.getProduct);
 productRoute.get('/school/:schoolId/products', productController.getSchoolProducts)
-
+productRoute.get('/product/search', productController.getProductSearch);
+productRoute.put('/product/:id', productController.postEditProduct);
 module.exports = productRoute;

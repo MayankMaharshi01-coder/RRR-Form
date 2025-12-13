@@ -15,6 +15,7 @@ import SchoolRegisterForm from "./components/form/SchoolRegisterForm";
 import { AlertPopup } from "./components/form/MiniComp";
 import SchoolPage from './components/SchoolPage';
 import Welcome from './pages/Welcome';
+import ProductEdit from './components/form/ProductEdit';
 
 function App() {
 
@@ -50,6 +51,7 @@ function App() {
             <Route path="/schoolLogin" element={<SchoolLoginForm showAlert={showAlert}/>}/>
             <Route path="/schoolRegister" element={<SchoolRegisterForm showAlert={showAlert}/>}/>
             <Route path="/schoolPage" element={<SchoolPage />}/>
+            <Route path="/productEdit/:_id" element={<ProductEdit showAlert={showAlert}/>}/>
           </Routes>
         </main>
     </div>

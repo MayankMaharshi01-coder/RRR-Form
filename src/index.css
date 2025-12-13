@@ -37,6 +37,6 @@ opacity: 1;
   }
 
  .autoFill:-webkit-autofill {
-        -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+        -webkit-box-shadow: 0 0 0px 1000px #D9E4DD inset !important;
         background-color: transparent !important;
     }
