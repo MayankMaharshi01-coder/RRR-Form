@@ -1,6 +1,7 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useRef, useState, useEffect } from "react";
 import { AllProductsData } from "../context/AllProducts";
 import { useGSAP } from "@gsap/react";
+import { getAllSchool } from "../components/form/api";
 import gsap from "gsap"; 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Autoplay, Navigation } from 'swiper/modules';
@@ -72,6 +73,15 @@ export default function Welcome() {
   });
   console.log(schoolName);
   val.current = false;
+
+
+  const [schoolData, setSchoolData] = useState([]);
+      useEffect(() => {
+        getAllSchool().then((data)=> {
+          setSchoolData(data);
+          console.log(data);
+        });
+      }, []);
 
   return (
     <>
@@ -163,9 +173,9 @@ export default function Welcome() {
             className="mt- p-4 text-green-900 rounded-lg bg-white text-3xl font-serif hover:bg-green-400 font-bold outline-none"
           >
             <option value="default">Select Your School</option>
-            {schoolName.current.map((school, index) => (
+            {schoolData.map((school, index) => (
               <option key={index} value={school}>
-                {school}
+                {school.schoolName}
               </option>
             ))}
           </select>
