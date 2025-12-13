@@ -106,7 +106,7 @@ export default function Welcome() {
                  />
                  
 </div>
-            <div className='flex justify-around items-center min-h-screen p-20 flex-col lg:flex-row bg-no-repeat w-full bg-cover' style={{ backgroundImage: `url(${TechBg})` }}>
+            <div className='flex justify-around items-center min-h-screen p-20 flex-col lg:flex-row bg-no-repeat w-full bg-cover' style={{ backgroundImage: `url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIAh52rNCNRJAcl3Zq7VBsRU2NeGdiTqdrlA&s)` }}>
                
             
                 
@@ -119,7 +119,7 @@ export default function Welcome() {
                         effect={'coverflow'}      
                         centeredSlides={true}     
                         loop={true}                              
-                        autoplay={{ delay: 2000, disableOnInteraction: false }} 
+                        autoplay={{ delay: 1000, disableOnInteraction: false }} 
                         
                         
                         navigation={true} 
@@ -138,7 +138,7 @@ export default function Welcome() {
                         {cardData.map((card) => (
                             <SwiperSlide key={card.id}>
                                 
-                                <div className="w-full h-full flex justify-center items-center"> 
+                                <div className="w-full h-full hover:cursor-alias flex justify-center items-center"> 
                                     <Slides
                                         image={card.image}
                                         name={card.name}
