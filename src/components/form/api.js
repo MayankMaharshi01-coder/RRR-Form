@@ -173,3 +173,18 @@ export function getProductSearch(query) {
       throw error;
     });
 }
+
+export function postAddHelpedStudent(productId, data) {
+  return axios
+    .post(`http://localhost:3000/product/${productId}/helpedStudent`, data, {
+      headers: { 'Content-Type': 'application/json' },
+    })
+    .then((response) => {
+      console.log('API response', response.data);
+      return response.data;
+    })
+    .catch((error) => {
+      console.error('API error', error);
+      throw error;
+    });
+}

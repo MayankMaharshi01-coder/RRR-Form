@@ -14,7 +14,7 @@ import { useParams } from 'react-router-dom';
 function ProductEdit({ showAlert }) {
    const [detail, setDetail] = useState({});
    const { _id } = useParams()
-  console.log('detail', detail);
+  console.log('detail', detail, detail.availability);
   
 
           const validationSchema = Yup.object({
@@ -68,7 +68,7 @@ function ProductEdit({ showAlert }) {
           images: detail.images || [],
           donorName: detail.donorName || '',
           donorClass: detail.donorClass || '',
-          availability: detail.availability || '',
+          availability: detail.availability !== undefined && detail.availability !== null ? String(detail.availability) : '',
           description: detail.description || '',
         },
          enableReinitialize: true,
@@ -98,11 +98,10 @@ function ProductEdit({ showAlert }) {
                   images: product.images || [],
                   donorName: product.donorName || '',
                   donorClass: product.donorClass || '',
-                  availability: product.availability || '',
+                  availability: product.availability !== undefined && product.availability !== null ? String(product.availability) : '',
                   description: product.description || '',
                 }});
               });
-              showAlert("Product Updated Successfully", "not-error", "uploadProduct");
             })
             .catch((error) => {
               console.error('Error during submission', error);
@@ -142,6 +141,7 @@ const removeFile = () => {
     const updatedImages = formik.values.images.filter((_, i) => i !== index);
     formik.setFieldValue('images', updatedImages);
   };
+
 
 
 return( <div className="bg-[#D9E4DD]  min-h-screen w-screen flex justify-center py-15 overflow-auto px-10">
@@ -311,10 +311,10 @@ return( <div className="bg-[#D9E4DD]  min-h-screen w-screen flex justify-center 
               value={formik.values.availability}
               onChange={formik.handleChange}
             >
-             <option className="bg-green-900" value={true}>
+             <option className="bg-green-900" value="1">
                 available
              </option>
- <option className="bg-green-900" value={false}>
+ <option className="bg-green-900" value="0">
                 unavailable
               </option>
             </DropDown>

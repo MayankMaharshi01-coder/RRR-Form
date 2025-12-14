@@ -93,12 +93,34 @@ exports.getSchoolById = (req, res, next) => {
 }
 
 
+
 exports.getSchoolLeaderBoard = async (req, res, next) => {
    const product = await Product.aggregate([
     {
       $group:{
         _id: "$school",
-        totalProducts: { $sum: 1 }
+        totalProducts: { $sum: 1 },
+        helpedStudents: {
+          $addToSet: {
+            $cond: [
+              { $and: [{ $ne: ["$helpedStudents.name", null] }, { $ne: ["$helpedStudents.name", ""] }] },
+              "$helpedStudents.name",
+              null
+            ]
+          }
+        }
+      }
+    },
+    {
+      $addFields: {
+        helpedStudents: {
+          $size: {
+            $filter: {
+              input: "$helpedStudents",
+              cond: { $ne: ["$$this", null] }
+            }
+          }
+        }
       }
     },
     {

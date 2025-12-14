@@ -18,6 +18,7 @@ import Welcome from './pages/Welcome';
 import ProductEdit from './components/form/ProductEdit';
 import { getCurrentSchool } from './components/form/api';
 import NoAuthRoutes from './pages/NoAuthRoutes';
+import HelpedStudentForm from './components/form/HelpedStudentForm';
 
 
 function App() {
@@ -67,6 +68,7 @@ console.log('auth in appjsx', auth);
             <Route path="/schoolRegister" element={<SchoolRegisterForm showAlert={showAlert}/>}/>
             <Route path="/schoolPage" element={<SchoolPage />}/>
             <Route path="/productEdit/:_id" element={<ProductEdit showAlert={showAlert}/>}/>
+            <Route path="/product/:_id/helpedStudent" element={<HelpedStudentForm showAlert={showAlert}/>}/>
           </Routes>
         </main>
     </div>
