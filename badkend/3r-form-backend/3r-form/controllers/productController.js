@@ -177,3 +177,38 @@ exports.getProductSearch = (req, res, next) => {
       res.status(400).json(err);
     });
 };
+
+
+
+exports.postAddHelpedStudent = (req, res, next) => {
+  const { id } = req.params;
+  const { helpedStudentName, helpedStudentClass } = req.body;
+  
+  console.log('body', req.body);
+  
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ message: 'Invalid product id' });
+  }
+
+  Product.findByIdAndUpdate(
+    id,
+    {
+      availability: 0,
+      helpedStudents: {
+        name: helpedStudentName,
+        class: helpedStudentClass,
+      }
+    },
+    { new: true }
+  )
+    .then((updatedProduct) => {
+      if (!updatedProduct) {
+        return res.status(404).json({ message: 'Product not found' });
+      }
+      return res.status(200).json({ message: 'Helped student added successfully', product: updatedProduct });
+    })
+    .catch((error) => {
+      console.error('Error adding helped student:', error);
+      res.status(500).json({ error: 'Failed to add helped student' });
+    });
+};

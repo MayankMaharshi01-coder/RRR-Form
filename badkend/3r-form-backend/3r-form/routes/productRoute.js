@@ -9,4 +9,5 @@ productRoute.get('/product/:id', productController.getProduct);
 productRoute.get('/school/:schoolId/products', productController.getSchoolProducts)
 productRoute.get('/product/search', productController.getProductSearch);
 productRoute.put('/product/:id', productController.postEditProduct);
+productRoute.post('/product/:id/helpedStudent', productController.postAddHelpedStudent);
 module.exports = productRoute;
