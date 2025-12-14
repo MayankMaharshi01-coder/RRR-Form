@@ -16,7 +16,7 @@ export default function Item({
     <div>
       <div id={`${id}`} className=" gap-5 sm:m-5 border border-gray-100 w-[350px] bg-white rounded-2xl shadow-md hover:shadow-xl hover:scale-110 m-5 transform  hover:-translate-y-0.5 font-serif transition-all duration-700">
         <img
-          className=" sm:h-64  sm:p-5 w-full h-64 object-contain bg-gray-50 p-5 rounded-xl "
+          className="sm:h-64  sm:p-5 w-full h-64 object-contain bg-gray-50 p-5 rounded-xl"
           src={imgUrl || 'https://via.placeholder.com/400x300?text=No+Image'}
           alt={name}
           onError={(e) => { e.currentTarget.src = 'https://via.placeholder.com/400x300?text=No+Image'; }}
