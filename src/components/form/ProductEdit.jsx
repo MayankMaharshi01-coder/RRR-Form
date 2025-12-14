@@ -83,6 +83,7 @@ function ProductEdit({ showAlert }) {
           data.append('donorName', values.donorName);
           data.append('donorClass', values.donorClass);
           data.append('description', values.description);
+          data.append('availability', values.availability);
           const promise = postEditProduct(_id, data);
           promise
             .then((responseData) => {
