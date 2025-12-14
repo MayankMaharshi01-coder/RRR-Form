@@ -743,7 +743,7 @@ function Home() {
                   onClick={openDropdown}
                   className="text-3xl font-serif font-semibold mb-10 flex items-center cursor-pointer"
                 >
-                  productData
+                  
                   <h1>Sort Products</h1>
                   <RiArrowDropDownLine size={50} />
                 </div>
@@ -905,7 +905,7 @@ function Home() {
               </div>
            })} */}
 
-            {productData.map(function ({
+            {dummyData.map(function ({
               category,
               name,
               thumbnail,
@@ -922,7 +922,7 @@ function Home() {
                   schoolName={schoolName}
                   key={_id}
                   id={_id}
-                  goodsData={productData}
+                  goodsData={dummyData}
                   handleClick={handleClick}
                 />
               );
