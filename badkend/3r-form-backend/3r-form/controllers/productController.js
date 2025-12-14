@@ -75,7 +75,7 @@ exports.postEditProduct = [
       condition,
       description,
     } = req.body;
-
+    const availability = Number(req.body.availability);
     // Handle thumbnail: prefer new upload, else use old path from body
     let thumbnail;
     if (req.files && req.files.thumbnail && req.files.thumbnail[0]) {
@@ -113,6 +113,7 @@ exports.postEditProduct = [
       images,
       condition,
       description,
+      availability,
     })
       .then(() => {
         res.status(201).json({ message: 'Product updated successfully' });
@@ -125,7 +126,9 @@ exports.postEditProduct = [
 ];
 
 exports.getAllProducts = (req, res, next) => {
-  Product.find()
+  Product.find({
+    availability: { $gt: 0 }
+  })
     .then((things) => {
       console.log('Fetched things:', things);
       res.status(200).json(things);
