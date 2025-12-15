@@ -201,3 +201,15 @@ export function getProductsByCategory(category) {
       throw error;
     });
 }
+
+export function getHelpedStudentsCountBySchool(schoolId) {
+  return axios
+    .get(`http://localhost:3000/school/${schoolId}/helpedStudents/count`)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      console.error('Error while getting helped students count by school', err);
+      throw err;
+    });
+}
