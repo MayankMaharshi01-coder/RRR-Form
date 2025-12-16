@@ -32,7 +32,6 @@ function HelpedStudentForm() {
             postAddHelpedStudent(_id, values)
             .then((response) => {
                 console.log('Successfully submitted helped student', response);
-                // You can add further actions here, like showing a success message or redirecting
             })
             .catch((error) => {
                 console.error('Error submitting helped student', error);

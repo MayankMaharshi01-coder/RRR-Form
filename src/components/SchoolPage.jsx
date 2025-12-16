@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Link } from "react";
+import React, { useState, useEffect } from "react";
 import { getSchoolById, getSchoolLeaderBoard } from "./form/api";
 import { FaBackward } from "react-icons/fa";
 import { useSearchParams } from "react-router-dom";
@@ -8,6 +8,7 @@ export default function SchoolPage() {
   const [searchParams] = useSearchParams();
   const schoolId = searchParams.get('id');
   const [selectedSchool, setSelectedSchool] = useState();
+  const [helpedCount, setHelpedCount] = useState(0);
 
   useEffect(() => {
     if (schoolId) {
@@ -18,10 +19,12 @@ export default function SchoolPage() {
             getSchoolLeaderBoard(),
           ]);
 
-          const schoolFromLeaderboard = leaderboardData.find(school => school._id === schoolId);
+          const schoolFromLeaderboard = leaderboardData.find((s) => s._id === schoolId);
           const totalProducts = schoolFromLeaderboard ? schoolFromLeaderboard.totalProducts : 0;
+          const helped = schoolFromLeaderboard ? (schoolFromLeaderboard.helpedStudents ?? 0) : 0;
+          setHelpedCount(helped);
 
-          setSelectedSchool({ ...schoolDetails, totalProducts });
+          setSelectedSchool({ ...schoolDetails, totalProducts, helpedStudentsCount: helped });
         } catch (error) {
           console.error("Failed to fetch school details:", error);
         }
@@ -36,7 +39,7 @@ export default function SchoolPage() {
       <div className="border-2 border-green-800 max-w-xl max-h-fit md:max-w-fit grow xl:border-none xl:bg-transparent bg-white rounded-4xl">
         <div className="xl:flex-row p-10 items-center gap-8 flex flex-col justify-between min-w-full">
         <div className="border-3 border-green-800 max-w-3xl shrink xl:w-fit rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-700">
-        <img className="rounded-lg" className="min-w-[450px]" src={`http://localhost:3000/${selectedSchool?.schoolImage}`} alt="school image" />
+        <img className="rounded-lg min-w-[450px]" src={selectedSchool?.schoolImage ? `http://localhost:3000/${selectedSchool.schoolImage}` : '/images/placeholder-school.png'} alt="school image" />
       </div>
       <div className="md:text-4xl flex flex-col gap-4 font-serif bg-white px-8 py-3 rounded-xl xl:w-fit shadow-xl min-w-[500px] md:min-w-2xl hover:shadow-2xl hover:scale-105 transition-all duration-700">
         <h1 className="text-green-800"><span className="text-black">School Name: </span>{selectedSchool?.schoolName}</h1>
@@ -47,7 +50,7 @@ export default function SchoolPage() {
         <h1 className="text-green-800"><span className="text-black">Incharge Name: </span>{selectedSchool?.inchargeName}</h1>
         <h1 className="text-green-800"><span className="text-black">Incharge Number: </span>{selectedSchool?.inchargePhone}</h1>
         <h1 className="text-green-800"><span className="text-black">Total Products: </span>{selectedSchool?.totalProducts}</h1>
-        <h1 className="text-green-800"><span className="text-black">Helped Students: </span></h1>
+        <h1 className="text-green-800"><span className="text-black">Helped Students: </span>{helpedCount}</h1>
       </div>
       </div>
       </div>

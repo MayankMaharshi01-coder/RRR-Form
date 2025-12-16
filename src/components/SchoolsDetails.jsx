@@ -14,13 +14,25 @@ export default function SchoolDetail() {
             getSchoolLeaderBoard(),
           ]);
 
-          const productsMap = new Map(leaderboardData.map(school => [school._id, school.totalProducts, school.helpedStudents]));
- console.log("school data in detail component", allSchools, leaderboardData, productsMap);
+          const productsMap = new Map(
+            leaderboardData.map((school) => [
+              school._id,
+              {
+                totalProducts: school.totalProducts || 0,
+                helpedStudents: school.helpedStudents ?? 0,
+              },
+            ])
+          );
+
           const mergedAndSortedData = allSchools
-            .map(school => ({
-              ...school,
-              totalProducts: productsMap.get(school._id) || 0, 
-            }))
+            .map((school) => {
+              const stats = productsMap.get(school._id) || { totalProducts: 0, helpedStudents: 0 };
+              return {
+                ...school,
+                totalProducts: stats.totalProducts,
+                helpedStudents: stats.helpedStudents,
+              };
+            })
             .sort((a, b) => b.totalProducts - a.totalProducts);
 
           setSchoolData(mergedAndSortedData);
@@ -51,7 +63,6 @@ export default function SchoolDetail() {
             <h1>{school.subDistrict}</h1>
             <span className="hidden md:block">{school.address}</span>
             <h1>{school.totalProducts}</h1>
-            <h2>{school.helpedStudents}</h2>
           </a>
          </div>
         })}
